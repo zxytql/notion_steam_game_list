@@ -110,19 +110,19 @@ def add_item_to_notion_database(game, achievements_info):
             "database_id": f"{NOTION_DATABASE_ID}",
         },
         "properties": {
-            "name": {
+            "Name": {
                 "type": "title",
                 "title": [{"type": "text", "text": {"content": f"{game['name']}"}}],
             },
-            "playtime": {"type": "number", "number": playtime},
-            "last play": {"type": "date", "date": {"start": last_played_time}},
-            "store url": {
+            "Play time": {"type": "number", "number": playtime},
+            "Last play": {"type": "date", "date": {"start": last_played_time}},
+            "Steam store URL": {
                 "type": "url",
                 "url": store_url,
             },
-            "completion": {"type": "number", "number": completion},
-            "total achievements": {"type": "number", "number": total_achievements},
-            "achieved achievements": {
+            "Completion": {"type": "number", "number": completion},
+            "Total achievements": {"type": "number", "number": total_achievements},
+            "Achievements achieved": {
                 "type": "number",
                 "number": achieved_achievements,
             },
@@ -150,7 +150,7 @@ def query_item_from_notion_database(game):
     }
 
     logger.info(f"querying {game['name']} from database")
-    data = {"filter": {"property": "name", "rich_text": {"equals": f"{game['name']}"}}}
+    data = {"filter": {"property": "Name", "rich_text": {"equals": f"{game['name']}"}}}
 
     try:
         response = send_request_with_retry(
@@ -192,19 +192,19 @@ def update_item_to_notion_database(page_id, game, achievements_info):
 
     data = {
         "properties": {
-            "name": {
+            "Name": {
                 "type": "title",
                 "title": [{"type": "text", "text": {"content": f"{game['name']}"}}],
             },
-            "playtime": {"type": "number", "number": playtime},
-            "last play": {"type": "date", "date": {"start": last_played_time}},
-            "store url": {
+            "Play time": {"type": "number", "number": playtime},
+            "Last play": {"type": "date", "date": {"start": last_played_time}},
+            "Steam store URL": {
                 "type": "url",
                 "url": store_url,
             },
-            "completion": {"type": "number", "number": completion},
-            "total achievements": {"type": "number", "number": total_achievements},
-            "achieved achievements": {
+            "Completion": {"type": "number", "number": completion},
+            "Total achievements": {"type": "number", "number": total_achievements},
+            "Achievements achieved": {
                 "type": "number",
                 "number": achieved_achievements,
             },
@@ -239,13 +239,13 @@ def database_create(page_id):
         },
         "title": [{"type": "text", "text": {"content": "Game List"}}],
         "properties": {
-            "name": {"title": {}},
-            "completion": {"number": {}},
-            "playtime": {"number": {}},
-            "last play": {"date": {}},
-            "total achievements": {"number": {}},
-            "achieved achievements": {"number": {}},
-            "store url": {"url": {}},
+            "Name": {"title": {}},
+            "Completion": {"number": {}},
+            "Play time": {"number": {}},
+            "Last play": {"date": {}},
+            "Total achievements": {"number": {}},
+            "Achievements achieved": {"number": {}},
+            "Steam store URL": {"url": {}},
         },
     }
 
@@ -329,9 +329,9 @@ if __name__ == "__main__":
                 playtime = round(float(game["playtime_forever"]) / 60, 1)
 
                 if (
-                    queryed_item["results"][0]["properties"]["playtime"]["number"]
+                    queryed_item["results"][0]["properties"]["Play time"]["number"]
                     == playtime
-                    and queryed_item["results"][0]["properties"]["total achievements"][
+                    and queryed_item["results"][0]["properties"]["Total achievements"][
                         "number"
                     ]
                     == achievements_info["total"]
